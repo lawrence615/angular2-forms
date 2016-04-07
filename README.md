@@ -1,14 +1,14 @@
 # Angular 2 Beta Boilerplate
 
 ## Description
-This repository acts as a very simple Angular 2 Beta Boilerplate with which you can get started developing Angular 2 immediately.
-It is derived from the official Angular 2 Documentation which can be found [here](https://angular.io/docs/ts/latest/quickstart.html).
+This repo has part 5 of the Udemy Angular 2 course. It basically involves how to handle a form e.g validation 
+
 ## Usage
 Follow the following steps and you're good to go! Important: Typescript and npm has to be installed on your machine!
 
 1: Clone repo
 ```
-git clone https://github.com/mschwarzmueller/angular-2-beta-boilerplate.git
+git clone https://github.com/lawrence615/angular2-forms.git
 ```
 2: Install packages
 ```
