@@ -2,3 +2,5 @@
 /app
 /src
 .idea/
+
+npm-debug.log
