@@ -13,29 +13,29 @@ import {Validators} from "angular2/common";
         <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()">
             <div>
                 <label for="mail">Mail</label>
-                <input [ngFormControl]="myForm.controls['email']" type="text" id="mail"/>
-                <span class="validation-error">Not Valid</span>
+                <input [ngFormControl]="myForm.controls['email']" type="text" id="mail" #mail="ngForm"/>
+                <span class="validation-error" *ngIf="!mail.valid">Not Valid</span>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input [ngFormControl]="myForm.controls['password']" type="text" id="password"/>
-                 <span class="validation-error">Not Valid</span>
+                <input [ngFormControl]="myForm.controls['password']" type="text" id="password" #password="ngForm"/>
+                 <span class="validation-error"  *ngIf="!password.valid">Not Valid</span>
             </div>
             <div>
                 <label for="confirm_password">Confirm Password</label>
-                <input [ngFormControl]="myForm.controls['confirmPassword']" type="text" id="confirm_password"/>
-                 <span class="validation-error">Not Valid</span>
+                <input [ngFormControl]="myForm.controls['confirmPassword']" type="text" id="confirm_password" #confirm_password="ngForm"/>
+                 <span class="validation-error"  *ngIf="!confirm_password.valid">Not Valid</span>
             </div>
             <button type="submit">Submit </button>
         </form>
         <h2>You submitted:</h2>
-        <div>Mail: {{user.mail}}</div>
-        <div>Password: {{user.pass}}</div>
+        <div>Mail: {{user.email}}</div>
+        <div>Password: {{user.password}}</div>
     `
 })
 
 export class DataDrivenFormComponent implements OnInit{
-    user = {'mail': '', 'pass': ''}
+    user = {'email': '', 'password': ''}
 
     myForm: ControlGroup;
 
@@ -53,6 +53,6 @@ export class DataDrivenFormComponent implements OnInit{
     }
 
     onSubmit(form) {
-        console.log(this.myForm);
+        this.user = this.myForm.value;
     }
 }
