@@ -1,6 +1,8 @@
 import {Component} from "angular2/core";
 import {FormBuilder} from "angular2/common";
 import {OnInit} from "angular2/core";
+import {ControlGroup} from "angular2/common";
+import {Validators} from "angular2/common";
 /**
  * Created by Lawrence on 4/7/16.
  */
@@ -8,20 +10,20 @@ import {OnInit} from "angular2/core";
     selector: 'data-driven-form',
     template: `
         <h2>Sign-up Form</h2>
-        <form (ngSubmit)="onSubmit()">
+        <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()">
             <div>
                 <label for="mail">Mail</label>
-                <input type="text" id="mail" required/>
+                <input [ngFormControl]="myForm.controls['email']" type="text" id="mail"/>
                 <span class="validation-error">Not Valid</span>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="text" id="password" required/>
+                <input [ngFormControl]="myForm.controls['password']" type="text" id="password"/>
                  <span class="validation-error">Not Valid</span>
             </div>
             <div>
                 <label for="confirm_password">Confirm Password</label>
-                <input type="text" id="confirm_password" required/>
+                <input [ngFormControl]="myForm.controls['confirmPassword']" type="text" id="confirm_password"/>
                  <span class="validation-error">Not Valid</span>
             </div>
             <button type="submit">Submit </button>
@@ -35,16 +37,22 @@ import {OnInit} from "angular2/core";
 export class DataDrivenFormComponent implements OnInit{
     user = {'mail': '', 'pass': ''}
 
+    myForm: ControlGroup;
+
     constructor(private _formBuilder:FormBuilder) {
 
     }
 
 
     ngOnInit():any {
-        return null;
+        this.myForm = this._formBuilder.group({
+            'email': ['', Validators.required],
+            'password': ['', Validators.required],
+            'confirmPassword': ['', Validators.required]
+        })
     }
 
     onSubmit(form) {
-
+        console.log(this.myForm);
     }
 }
