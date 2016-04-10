@@ -3,6 +3,7 @@ import {FormBuilder} from "angular2/common";
 import {OnInit} from "angular2/core";
 import {ControlGroup} from "angular2/common";
 import {Validators} from "angular2/common";
+import {Control} from "angular2/common";
 /**
  * Created by Lawrence on 4/7/16.
  */
@@ -34,10 +35,10 @@ import {Validators} from "angular2/common";
     `
 })
 
-export class DataDrivenFormComponent implements OnInit{
+export class DataDrivenFormComponent implements OnInit {
     user = {'email': '', 'password': ''}
 
-    myForm: ControlGroup;
+    myForm:ControlGroup;
 
     constructor(private _formBuilder:FormBuilder) {
 
@@ -47,12 +48,21 @@ export class DataDrivenFormComponent implements OnInit{
     ngOnInit():any {
         this.myForm = this._formBuilder.group({
             'email': ['', Validators.required],
-            'password': ['', Validators.required],
+            'password': ['', Validators.compose([
+                Validators.required,
+                hasNumbers
+            ])],
             'confirmPassword': ['', Validators.required]
         })
     }
 
     onSubmit(form) {
         this.user = this.myForm.value;
+    }
+}
+
+function hasNumbers(control:Control):{[s: string]: boolean} {
+    if (!control.value.match('\\d+')) {
+        return {noNumbers: true}
     }
 }
